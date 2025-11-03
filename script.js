@@ -1,3 +1,10 @@
+const offenceHeadlines = {
+  A: "Pasal A - Lalu Lintas",
+  B: "Pasal B - Pelanggaran Umum",
+  C: "Pasal C - Kejahatan Ringan",
+  D: "Pasal D - Kejahatan Berat"
+};
+
 const offences = {
   A: [ // Sekarang A = Lalu Lintas (dulunya B)
     { name: "B01 - Kekerasan Ringan", fine: 2000, time: 20, impound: 0 },
@@ -82,44 +89,47 @@ const offences = {
   ]
 };
 
-
-
-// Menyimpan status checkbox tiap kategori
+// Simpan status checkbox tiap kategori
 let checkedState = { A: [], B: [], C: [], D: [] };
 
-function showOffences() {
-  const category = document.getElementById("category").value;
+// Inisialisasi semua kategori langsung tampil
+function initOffences() {
   const container = document.getElementById("offence-list");
-  container.innerHTML = ""; // hide semua pasal lain
+  container.innerHTML = "";
 
-  if (!category || !offences[category]) {
-    container.innerHTML = "<p>Tidak ada pasal untuk kategori ini.</p>";
-    return;
-  }
+  Object.keys(offences).forEach(cat => {
+    // Headline kategori
+    const headline = document.createElement("h2");
+    headline.innerText = offenceHeadlines[cat];
+    container.appendChild(headline);
 
-  offences[category].forEach((o, index) => {
-    const div = document.createElement("div");
-    div.className = "offence";
-    div.innerHTML = `
-      <label>
-        <input type="checkbox" 
-          data-category="${category}"
-          data-index="${index}"
-          data-fine="${o.fine}" 
-          data-time="${o.time}" 
-          data-impound="${o.impound}" 
-          onchange="updateState(this)">
-        ${o.name}
-      </label>
-      <span> — Denda: $${o.fine}, Penjara: ${o.time} bulan, Impound: ${o.impound} hari</span>
-    `;
-    // restore state checkbox
-    if (checkedState[category][index]) div.querySelector("input").checked = true;
+    // Daftar checkbox
+    offences[cat].forEach((o, index) => {
+      const div = document.createElement("div");
+      div.className = "offence";
+      div.innerHTML = `
+        <label>
+          <input type="checkbox" 
+            data-category="${cat}"
+            data-index="${index}"
+            data-fine="${o.fine}" 
+            data-time="${o.time}" 
+            data-impound="${o.impound}" 
+            onchange="updateState(this)">
+          ${o.name}
+        </label>
+        <span> — Denda: $${o.fine}, Penjara: ${o.time} bulan, Impound: ${o.impound} hari</span>
+      `;
 
-    container.appendChild(div);
+      // restore checkbox state
+      if (checkedState[cat][index]) div.querySelector("input").checked = true;
+
+      container.appendChild(div);
+    });
   });
 }
 
+// Update state saat checkbox diklik
 function updateState(cb) {
   const cat = cb.dataset.category;
   const idx = cb.dataset.index;
@@ -127,6 +137,7 @@ function updateState(cb) {
   updateTotals();
 }
 
+// Hitung total
 function updateTotals() {
   let totalFine = 0, totalTime = 0, totalImpound = 0;
   Object.keys(checkedState).forEach(cat => {
@@ -139,14 +150,22 @@ function updateTotals() {
       }
     });
   });
-
   document.getElementById("totalFine").innerText = "$" + totalFine;
   document.getElementById("totalTime").innerText = totalTime + " bulan";
   document.getElementById("totalImpound").innerText = totalImpound + " Hari";
 }
 
+// Reset semua checkbox di semua kategori
 function resetCalculator() {
-  Object.keys(checkedState).forEach(cat => checkedState[cat] = []);
+  Object.keys(checkedState).forEach(cat => {
+    checkedState[cat] = checkedState[cat].map(() => false);
+  });
+  document.querySelectorAll('#offence-list input[type="checkbox"]').forEach(cb => cb.checked = false);
   updateTotals();
-  showOffences(); // tetap tampilkan kategori yang dipilih saat ini, tapi kosong
 }
+
+// Load awal
+window.onload = () => {
+  initOffences();
+  updateTotals();
+};
