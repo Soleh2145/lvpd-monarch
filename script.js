@@ -1,5 +1,18 @@
 const offences = {
-  A: [
+  A: [ // Sekarang A = Lalu Lintas (dulunya B)
+    { name: "B01 - Kekerasan Ringan", fine: 2000, time: 20, impound: 0 },
+    { name: "B02 - Gangguan Ketertiban Umum", fine: 800, time: 6, impound: 0 },
+    { name: "B03 - Pencurian Ringan", fine: 1500, time: 18, impound: 0 },
+    { name: "B04 - Vandalisme Ringan", fine: 1200, time: 12, impound: 0 },
+    { name: "B05 - Mabuk di Tempat Umum", fine: 700, time: 3, impound: 0 },
+    { name: "B06 - Pelecehan Ringan", fine: 900, time: 6, impound: 0 },
+    { name: "B07 - Kepemilikan Narkotika Skala Kecil", fine: 3000, time: 24, impound: 0 },
+    { name: "B08 - Masuk Paksa Properti Ringan", fine: 2500, time: 22, impound: 0 },
+    { name: "B09 - Menyimpan Barang Curian Ringan", fine: 1800, time: 15, impound: 0 },
+    { name: "B10 - Kembang Api Ilegal", fine: 900, time: 4, impound: 0 }
+    // dst sesuai list B
+  ],
+  B: [ // Sekarang B = Pasal A lama (Mengemudi & Lalu Lintas)
     { name: "A21 - Mengemudi Tanpa Lampu", fine: 1300, time: 1, impound: 0 },
     { name: "A22 - Menggunakan Jalur Darurat Tanpa Alasan", fine: 4500, time: 5, impound: 1 },
     { name: "A23 - Menghalangi Trotoar / Pejalan Kaki", fine: 2000, time: 2, impound: 3 },
@@ -11,38 +24,6 @@ const offences = {
     { name: "A29 - Menabrak Rambu Lalu Lintas", fine: 800, time: 3, impound: 0 },
     { name: "A30 - Mengemudi Tanpa Asuransi", fine: 1500, time: 5, impound: 1 },
     { name: "A31 - Pengejaran Terhadap Petugas", fine: 5000, time: 15, impound: 4 }
-  ],
-  B: [
-    { name: "B01 - Kekerasan Ringan", fine: 2000, time: 20, impound: 0 },
-    { name: "B02 - Gangguan Ketertiban Umum", fine: 800, time: 6, impound: 0 },
-    { name: "B03 - Pencurian Ringan", fine: 1500, time: 18, impound: 0 },
-    { name: "B04 - Vandalisme Ringan", fine: 1200, time: 12, impound: 0 },
-    { name: "B05 - Mabuk di Tempat Umum", fine: 700, time: 3, impound: 0 },
-    { name: "B06 - Pelecehan Ringan", fine: 900, time: 6, impound: 0 },
-    { name: "B07 - Kepemilikan Narkotika Skala Kecil", fine: 3000, time: 24, impound: 0 },
-    { name: "B08 - Masuk Paksa Properti Ringan", fine: 2500, time: 22, impound: 0 },
-    { name: "B09 - Menyimpan Barang Curian Ringan", fine: 1800, time: 15, impound: 0 },
-    { name: "B10 - Kembang Api Ilegal", fine: 900, time: 4, impound: 0 },
-    { name: "B11 - Penipuan Kecil", fine: 2200, time: 18, impound: 0 },
-    { name: "B12 - Masuk Area Pemerintah Tanpa Izin", fine: 1300, time: 8, impound: 0 },
-    { name: "B13 - Menjual Barang Tanpa Izin di Jalan", fine: 700, time: 3, impound: 0 },
-    { name: "B14 - Berkeliaran di Tempat Terlarang", fine: 400, time: 1, impound: 0 },
-    { name: "B15 - Mengganggu Acara Publik", fine: 1000, time: 6, impound: 0 },
-    { name: "B16 - Penyelundupan Skala Kecil", fine: 3500, time: 24, impound: 0 },
-    { name: "B17 - Vandalisme Minor", fine: 800, time: 2, impound: 0 },
-    { name: "B18 - Mencuri dari Toko", fine: 1200, time: 8, impound: 0 },
-    { name: "B19 - Cybercrime Ringan", fine: 2000, time: 12, impound: 0 },
-    { name: "B20 - Judi Ilegal Skala Kecil", fine: 1500, time: 10, impound: 0 },
-    { name: "B21 - Menghina Warga", fine: 600, time: 3, impound: 0 },
-    { name: "B22 - Menimbulkan Keributan di Tempat Umum", fine: 700, time: 4, impound: 0 },
-    { name: "B23 - Mengganggu Ketertiban Jalan", fine: 500, time: 2, impound: 0 },
-    { name: "B24 - Penipuan Online Skala Kecil", fine: 1800, time: 12, impound: 0 },
-    { name: "B25 - Mengganggu Layanan Publik", fine: 1200, time: 6, impound: 0 },
-    { name: "B26 - Menjual Alkohol Ilegal", fine: 2000, time: 10, impound: 0 },
-    { name: "B27 - Melanggar Peraturan Lingkungan", fine: 1000, time: 5, impound: 0 },
-    { name: "B28 - Memalsukan Dokumen Ringan", fine: 2500, time: 15, impound: 0 },
-    { name: "B29 - Mengintimidasi Warga", fine: 1500, time: 8, impound: 0 },
-    { name: "B30 - Mengganggu Tempat Ibadah", fine: 1200, time: 6, impound: 0 }
   ],
   C: [
     { name: "C01 - Perampokan Bersenjata", fine: 15000, time: 120, impound: 0 },
@@ -101,40 +82,62 @@ const offences = {
   ]
 };
 
+
+
+// Menyimpan status checkbox tiap kategori
+let checkedState = { A: [], B: [], C: [], D: [] };
+
 function showOffences() {
   const category = document.getElementById("category").value;
   const container = document.getElementById("offence-list");
-  container.innerHTML = "";
+  container.innerHTML = ""; // hide semua pasal lain
 
   if (!category || !offences[category]) {
     container.innerHTML = "<p>Tidak ada pasal untuk kategori ini.</p>";
     return;
   }
 
-  offences[category].forEach(o => {
+  offences[category].forEach((o, index) => {
     const div = document.createElement("div");
     div.className = "offence";
     div.innerHTML = `
       <label>
         <input type="checkbox" 
+          data-category="${category}"
+          data-index="${index}"
           data-fine="${o.fine}" 
           data-time="${o.time}" 
           data-impound="${o.impound}" 
-          onchange="updateTotals()">
+          onchange="updateState(this)">
         ${o.name}
       </label>
       <span> — Denda: $${o.fine}, Penjara: ${o.time} bulan, Impound: ${o.impound} hari</span>
     `;
+    // restore state checkbox
+    if (checkedState[category][index]) div.querySelector("input").checked = true;
+
     container.appendChild(div);
   });
 }
 
+function updateState(cb) {
+  const cat = cb.dataset.category;
+  const idx = cb.dataset.index;
+  checkedState[cat][idx] = cb.checked;
+  updateTotals();
+}
+
 function updateTotals() {
   let totalFine = 0, totalTime = 0, totalImpound = 0;
-  document.querySelectorAll('#offence-list input[type="checkbox"]:checked').forEach(cb => {
-    totalFine += Number(cb.dataset.fine);
-    totalTime += Number(cb.dataset.time);
-    totalImpound += Number(cb.dataset.impound);
+  Object.keys(checkedState).forEach(cat => {
+    checkedState[cat].forEach((checked, idx) => {
+      if (checked) {
+        const o = offences[cat][idx];
+        totalFine += o.fine;
+        totalTime += o.time;
+        totalImpound += o.impound;
+      }
+    });
   });
 
   document.getElementById("totalFine").innerText = "$" + totalFine;
@@ -143,6 +146,7 @@ function updateTotals() {
 }
 
 function resetCalculator() {
-  document.querySelectorAll('#offence-list input[type="checkbox"]').forEach(cb => cb.checked = false);
+  Object.keys(checkedState).forEach(cat => checkedState[cat] = []);
   updateTotals();
+  showOffences(); // tetap tampilkan kategori yang dipilih saat ini, tapi kosong
 }
