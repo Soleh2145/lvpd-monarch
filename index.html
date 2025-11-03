@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Monarch</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #111; color: #fff; }
+    .container { max-width: 900px; margin: 20px auto; padding: 20px; }
+    .tabs { display: flex; margin-bottom: 10px; }
+    .tab { flex: 1; padding: 10px; text-align: center; background: #333; cursor: pointer; color: #fff; }
+    .tab.active { background: #555; font-weight: bold; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .offence { margin-bottom: 5px; }
+    .result { margin-top: 20px; }
+    button { padding: 5px 10px; margin-top: 10px; cursor: pointer; }
+    pre { white-space: pre-wrap; padding: 10px; border-radius: 5px; }
+    .sop-number { color: #ff7f50; font-weight: bold; }
+    .sop-title { color: #00ffff; font-weight: bold; }
+    .sop-text { color: #ffff00; }
+    ul li { margin-bottom: 8px; color: #fff; }
+    h3 { color: #ff4500; }
+    .warning h3 { color: #ff0000; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Kalkulator UUD LVPD</h1>
+
+    <div class="tabs">
+      <div class="tab active" onclick="openTab('calculator')">Kalkulator Pasal</div>
+      <div class="tab" onclick="openTab('sop')">SOP</div>
+      <div class="tab" onclick="openTab('rules')">Rules UUD</div>
+    </div>
+
+    <!-- TAB Kalkulator -->
+    <div id="calculator" class="tab-content active">
+      <div class="category">
+        <label for="category">Pilih Kategori:</label>
+        <select id="category" onchange="showOffences()">
+          <option value="">-- Pilih Kategori --</option>
+          <option value="A">Pasal A - Pelanggaran Umum</option>
+          <option value="B">Pasal B - Lalu Lintas</option>
+          <option value="C">Pasal C - Kejahatan Ringan</option>
+          <option value="D">Pasal D - Kejahatan Berat</option>
+        </select>
+      </div>
+
+      <div id="offence-list"></div>
+      <button onclick="resetCalculator()">Reset</button>
+
+      <div class="result">
+        <p><b>Total Denda:</b> <span id="totalFine">$0</span></p>
+        <p><b>Total Penjara:</b> <span id="totalTime">0 bulan</span></p>
+        <p><b>Total Impound:</b> <span id="totalImpound">0 Hari</span></p>
+      </div>
+    </div>
+
+    <!-- TAB SOP -->
+    <div id="sop" class="tab-content">
+      <pre>
+<span class="sop-number">1.</span> <span class="sop-title">KEPOLISIAN</span> <span class="sop-text">Bila melihat warga membawa senjata api / narkotika, boleh RPGUN untuk preventif.</span>
+
+<span class="sop-number">2.</span> <span class="sop-title">SOP SENJATA</span>
+<span class="sop-text">A. Bawa hanya Silenced, Desert Eagle, SG.
+B. Perang besar bisa ambil senjata di locker.</span>
+
+<span class="sop-number">3.</span> <span class="sop-title">SOP BERPATROLI</span>
+<span class="sop-text">A. Minimal 2 petugas (boleh sendiri jika tidak ada rekan).
+B. Gunakan kendaraan dinas.</span>
+
+<span class="sop-number">4.</span> <span class="sop-title">SOP ACCESSORIES</span>
+<span class="sop-text">A. Dilarang menggunakan toys berlebihan.
+B. Topi toys wajib hadap depan.
+C. Wajib memakai toys armor saat patroli.</span>
+
+<span class="sop-number">5.</span> <span class="sop-title">SOP TKP</span>
+<span class="sop-text">A. Suspect pingsan, jangan geledah langsung.
+B. Beri waktu 2 menit untuk beristirahat.
+C. Suspect bergerak, boleh taser / penodongan.</span>
+
+<span class="sop-number">6.</span> <span class="sop-title">SOP PENGEJARAN</span>
+<span class="sop-text">A. Maksimal 4 kendaraan LVPD.
+B. PIT setelah peringatan 3.
+C. Jarak antar peringatan = 5 menit.</span>
+
+<span class="sop-number">7.</span> <span class="sop-title">SOP SANDRA</span>
+<span class="sop-text">Negosiasi oleh komando penanganan, kendaraan basic unit membawa Sandra.</span>
+
+<span class="sop-number">8.</span> <span class="sop-title">SOP PENANGANAN SUSPECT</span>
+<span class="sop-text">A. Di federal, boleh geledah.
+B. Melarikan diri, taser / shoot fire.</span>
+
+<span class="sop-number">9.</span> <span class="sop-title">SOP PEMBERHENTIAN PENGENDARA</span>
+<span class="sop-text">Gunakan megaphone / voice teriak.</span>
+
+<span class="sop-number">10.</span> <span class="sop-title">SOP TKP 2</span>
+<span class="sop-text">A. Boleh periksa jika tertangkap tangan.
+B. Wajib surat perintah jika geledah properti (kecuali darurat).</span>
+      </pre>
+    </div>
+
+    <!-- TAB Rules -->
+    <div id="rules" class="tab-content">
+      <h3>Rules UUD</h3>
+
+      <ul>
+        <li>Jika memasukkan Suspect tidak sesuai pasal akan dikenakan <b>DEMOTED</b></li>
+        <li>Dilarang memasukkan invoice ke dalam kantong Suspect.</li>
+        <li>Pelanggaran sesuai pasal akan dikenakan denda & penjara</li>
+        <li>Wajib foto KTP Suspect untuk criminal record</li>
+      </ul>
+
+      <div class="warning">
+        <h3>JIKA TIDAK MENGIKUTI RULES, AKAN DI WARNING 2 !!</h3>
+        <p>TTD : Comander LVPD</p>
+        <p>YURA AW AW</p>
+      </div>
+
+      <footer>
+        <p>&copy; Las Ventures Police Dapertement.</p>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function openTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelector(`.tab[onclick="openTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('#offence-list input[type="checkbox"]').forEach(cb => cb.checked = false);
+      document.getElementById("totalFine").innerText = "$0";
+      document.getElementById("totalTime").innerText = "0 bulan";
+      document.getElementById("totalImpound").innerText = "0 Hari";
+    }
+  </script>
+</body>
+</html>
